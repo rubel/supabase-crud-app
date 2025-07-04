@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "pages:build": "npx next-on-pages build",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -22,6 +24,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "eslint": "^9",
-    "eslint-config-next": "15.3.4"
+    "eslint-config-next": "15.3.4",
+    "next-on-pages": "^0.1.6",
+    "wrangler": "^4.23.0"
   }
 }
