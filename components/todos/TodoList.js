@@ -8,13 +8,14 @@ function TodoList() {
   useEffect(() => {
     const loadTodos = async () => {
       const todos_res = await supabase.from("todos").select();
+      console.log(todos_res);
       setTodos(todos_res?.data);
       console.log(todos_res);
     };
     loadTodos();
   }, []);
   return (
-    <div style={{display:'flex',gap:'10px'}}>
+    <div>
       {todos.map((todo, i) => (
         <TodoCard
           key={i}

@@ -1,9 +1,7 @@
-name = "supabase-todo"
-compatibility_date = "2024-04-01"
-
-[build]
-command = "npx next-on-pages build"
-
-[site]
-bucket = ".vercel/output/static"
-entry-point = ".vercel/output"
+  main = ".open-next/worker.js"
+  name = "my-app"
+  compatibility_date = "2025-03-25"
+  compatibility_flags = ["nodejs_compat"]
+  [assets]
+  directory = ".open-next/assets"
+  binding = "ASSETS"
