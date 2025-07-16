@@ -3,6 +3,13 @@ import supabase from "@/misc/supabase";
 import React, { useEffect, useState } from "react";
 import TodoCard from "./TodoCard";
 
+const TodosContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+`
+
 function TodoList() {
   const [todos, setTodos] = useState([]);
   useEffect(() => {
@@ -15,7 +22,7 @@ function TodoList() {
     loadTodos();
   }, []);
   return (
-    <div>
+    <TodosContainer>
       {todos.map((todo, i) => (
         <TodoCard
           key={i}
@@ -24,7 +31,7 @@ function TodoList() {
           title={todo.title}
         />
       ))}
-    </div>
+    </TodosContainer>
   );
 }
 
