@@ -1,9 +1,10 @@
-import TodoList from "@/components/todos/TodoList";
+import JokeList from "@/components/todos/JokesList";
+
 
 export default function Home() {
   return (
     <div>
-      <TodoList />
+      <JokeList />
     </div>
   );
 }
