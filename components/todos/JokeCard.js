@@ -20,60 +20,60 @@ const HeaderRow = styled(Box)`
 `;
 
 const JokeDescription = styled(Typography)({
-  overflow: 'hidden',
-  display: '-webkit-box',
+  overflow: "hidden",
+  display: "-webkit-box",
   WebkitLineClamp: 2,
-  WebkitBoxOrient: 'vertical',
+  WebkitBoxOrient: "vertical",
 });
 
 const getStyledChip = (likes, dislikes) => {
   return (
     <Chip
       size="small"
-      style={{ background: likes > dislikes ? "" : "crimson" }}
+      style={{ 
+        background: 'linear-gradient(to right, #4caf50 50%, crimson 50%)'
+      }}
       label={
-        <div style={{ display: "flex" }}>
-          <span
+        <div style={{ display: "flex",gap:'30px' }}>
+          <div
             style={{
               display: "flex",
               gap: "6px",
               justifyItems: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             <ThumbUpIcon />
             <span>{likes}</span>
-          </span>
-          <span
-            style={{ width: "10px", background: "gold", margin: "0px 14px" }}
-          />
-          <span
+          </div>
+          
+          <div
             style={{
               display: "flex",
               gap: "6px",
               justifyItems: "center",
               alignItems: "center",
+              color: "white",
             }}
           >
             <ThumbDownIcon />
             <span>{dislikes}</span>
-          </span>
+          </div>
         </div>
       }
-      color="success"
     />
   );
 };
 
-export default function JokeCard({
-  title,
-  description,
-  likes,
-  dislikes,
-  lang,
-}) {
+export default function JokeCard({ joke, jokeSelected }) {
+  const { title, joke: description, likes, dislikes, lang } = joke;
   return (
-    <StyledCard>
+    <StyledCard
+      onClick={() => {
+        jokeSelected(joke);
+      }}
+    >
       <CardContent>
         <HeaderRow>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
