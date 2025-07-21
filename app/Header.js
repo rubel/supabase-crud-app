@@ -1,6 +1,7 @@
-"use client"
-import styled from '@emotion/styled';
-import React from 'react';
+"use client";
+import { useLanguage } from "@/context/LanguageContext";
+import styled from "@emotion/styled";
+import React from "react";
 
 const Container = styled.div`
   width: 100%;
@@ -21,9 +22,19 @@ const TextAnimation = styled.div`
   animation: bounce 2s infinite;
 
   @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-20px); }
-    60% { transform: translateY(-10px); }
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-20px);
+    }
+    60% {
+      transform: translateY(-10px);
+    }
   }
 `;
 
@@ -36,6 +47,7 @@ const MenuItem = styled.a`
   border: 1px solid #333;
   border-radius: 5px;
   margin-left: 10px;
+  cursor: pointer;
 
   &:hover {
     background-color: #333;
@@ -49,12 +61,30 @@ const LanguageMenu = styled.div`
 `;
 
 const Header = () => {
+  const { language, setLanguage } = useLanguage();
+
   return (
     <Container>
       <TextAnimation>It&apos;s a Joke!</TextAnimation>
       <LanguageMenu>
-        <MenuItem href="#">English</MenuItem>
-        <MenuItem href="#">Bangla</MenuItem>
+        <MenuItem
+          style={language === "" ? { color: "crimson" } : {}}
+          onClick={() => setLanguage("")}
+        >
+          All
+        </MenuItem>
+        <MenuItem
+          style={language === "en" ? { color: "crimson" } : {}}
+          onClick={() => setLanguage("en")}
+        >
+          English
+        </MenuItem>
+        <MenuItem
+          style={language === "bn" ? { color: "crimson" } : {}}
+          onClick={() => setLanguage("bn")}
+        >
+          Bangla
+        </MenuItem>
         <MenuItem href="#">Login</MenuItem>
       </LanguageMenu>
     </Container>

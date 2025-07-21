@@ -3,6 +3,7 @@ import supabase from "@/misc/supabase";
 import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import JokeCard from "./JokeCard";
+import { useLanguage } from "@/context/LanguageContext";
 
 const JokesContainer = styled.div`
   display: grid;
@@ -40,7 +41,6 @@ const StyledDialog = styled.dialog`
 
   z-index: 1000;
 `;
-
 
 const FlipWrapper = styled.div`
   perspective: 1000px;
@@ -84,15 +84,19 @@ function JokeList() {
   const [jokes, setJokes] = useState([]);
   const [selectedJoke, setSelectedJoke] = useState(null);
   const [isExiting, setIsExiting] = useState(false);
+  const {language, setLanguage} = useLanguage();
   const dialogRef = useRef(null);
 
   useEffect(() => {
     const loadJokes = async () => {
-      const jokes_res = await supabase.from("jokes").select();
+      const jokes_res =
+        language === ""
+          ? await supabase.from("jokes").select()
+          : await supabase.from("jokes").select().eq("lang", language);
       setJokes(jokes_res?.data || []);
     };
     loadJokes();
-  }, []);
+  }, [language]);
 
   useEffect(() => {
     if (selectedJoke && dialogRef.current) {
@@ -118,14 +122,18 @@ function JokeList() {
       dialogRef.current?.close();
       setSelectedJoke(null);
       setIsExiting(false);
-    }, 600); // duration of exit animation
+    }, 600);
   };
 
   return (
     <>
       <JokesContainer>
         {jokes.map((joke, i) => (
-          <JokeCard key={i} joke={joke} jokeSelected={() => jokeSelected(joke)} />
+          <JokeCard
+            key={i}
+            joke={joke}
+            jokeSelected={() => jokeSelected(joke)}
+          />
         ))}
       </JokesContainer>
 
